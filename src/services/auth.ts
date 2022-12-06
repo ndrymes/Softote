@@ -7,8 +7,8 @@ import { ErrorCodes } from 'src/domain/errors';
 export class AuthService {
     login(clientId: string, clientToken: string) {
         try {
-            const FIXEDCLIENTID = '12489DSGFH';
-            const FIXEDCLIENTTOKEN = 'jhdh@38333309845788234234';
+            const FIXEDCLIENTID = '744c28de-a0za-491a-bf08-b613797f7665';
+            const FIXEDCLIENTTOKEN = '8Tf8Q~3IAfEJsr-BR2Td.u5RJTpUUcVZc-bdfVS';
             if (clientId !== FIXEDCLIENTID || clientToken !== FIXEDCLIENTTOKEN) {
                 throw new Error('invalid token');
             }
