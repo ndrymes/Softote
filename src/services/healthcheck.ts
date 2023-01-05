@@ -19,3 +19,7 @@ export class HealthcheckService {
         return pendingMigrations.length === 0;
     }
 }
+
+const sample = () => {
+    
+}

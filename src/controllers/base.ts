@@ -1,13 +1,19 @@
 import { Router } from 'express';
 
-export class BaseController {
-    protected router: Router;
+export class BaseController{
 
-    constructor() {
-        this.router = Router();
-    }
+  protected router: Router;
 
-    public getRouter(): Router {
-        return this.router;
-    }
+  constructor(){
+
+    this.router = Router();
+
+  }
+
+  public getRouter(): Router{
+
+    return this.router;
+
+  }
+
 }

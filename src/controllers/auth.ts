@@ -19,6 +19,8 @@ export class AuthController {
 
     public async login(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
+            console.log('yeahhh');
+            
             const { clientId, clientSecret } = req.body;
             const token = this.options.authService.login(clientId, clientSecret);
 

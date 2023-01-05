@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["bvn"],
+  "properties": {
+    "bvn": {
+      "type": "string",
+      "pattern": "^\\d+$",
+      "errorMessage": {
+        "pattern": "bvn must contain only digits"
+      },
+      "description": "its an eleven digit number that is assigned to a user for a means of verification",
+      "examples": [ 11113333445 ],
+      "minLength": 11,
+      "maxLength": 11
+    }
+  }
+}

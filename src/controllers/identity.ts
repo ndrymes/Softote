@@ -1,7 +1,13 @@
 import { Request, Response, Router, NextFunction } from 'express';
 
-import { StandardError } from 'src/libs/standard-error';
-import { ErrorCodes } from 'src/domain/errors';
+import { validateBody } from "src/libs/validator";
+
+import bvnCheckSchema from 'src/schemas/bvncheck.schema.json'
+import ninCheckSchema from 'src/schemas/ninCheck.schema.json'
+import passportCheckSchema from 'src/schemas/passportCheck.schema.json'
+import driversLicenseCheckSchema from 'src/schemas/driversLicenseCheck.schema.json'
+import phoneNumberCheckSchema from 'src/schemas/phoneNumberCheck.schema.json'
+import accountNumberCheckSchema from 'src/schemas/accountNumberCheck.schema.json'
 
 import { identityServices } from 'src/services/identity';
 import { IdentityServices } from 'src/services/identity/youverify';
@@ -12,6 +18,11 @@ export class IdentityController {
     constructor() {
         this.router = Router();
         this.router.post('/identity/ng/bvn', handleTokenAuthorization(), this.bvnCheck.bind(this));
+        this.router.post('/identity/ng/vnin', handleTokenAuthorization(), this.getUserDataWithNIN.bind(this));
+        this.router.post('/identity/ng/passport', handleTokenAuthorization(), this.getUserDataWithPassportId.bind(this));
+        this.router.post('/identity/ng/drivers-license', handleTokenAuthorization(), this.getUserDataWithDriversLicence.bind(this));
+        this.router.post('/identity/ng/phone', handleTokenAuthorization(), this.getUserDataWithPhoneNumber.bind(this));
+        this.router.post('/identity/ng/bank-account-number', handleTokenAuthorization(), this.getUserDataWithAccountNumber.bind(this));
     }
 
     getRouter(): Router {
@@ -21,13 +32,90 @@ export class IdentityController {
     public async bvnCheck(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
             const { bvn } = req.body;
-            const isnum = /^\d+$/.test(bvn);
-            //this should be a proper validation
-            if (!bvn) throw new StandardError(ErrorCodes.API_VALIDATION_ERROR, 'Bvn is required');
-            if (!isnum) throw new StandardError(ErrorCodes.API_VALIDATION_ERROR, 'Bvn must be a number');
+            validateBody(req.body, bvnCheckSchema)
 
             const service = await this.getService('youVerifyService');
-            const userData = await service.bvnCheck(bvn);
+            const userData = await service.getUserDataWithBvn(bvn);
+            res.status(200).send({
+                status: true,
+                data: userData
+            });
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+    public async getUserDataWithNIN(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        try {
+            const { vnin } = req.body;
+            validateBody(req.body, ninCheckSchema)
+
+            const service = await this.getService('youVerifyService');
+            const userData = await service.getUserDataWithNIN(vnin);
+            res.status(200).send({
+                status: true,
+                data: userData
+            });
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+     public async getUserDataWithPassportId(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        try {
+            const { passportId } = req.body;
+            validateBody(req.body, passportCheckSchema)
+
+            const service = await this.getService('youVerifyService');
+            const userData = await service.getUserDataWithPassportId(passportId);
+            res.status(200).send({
+                status: true,
+                data: userData
+            });
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+     public async getUserDataWithDriversLicence(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        try {
+            const { licenseId } = req.body;
+            validateBody(req.body, driversLicenseCheckSchema)
+
+            const service = await this.getService('youVerifyService');
+            const userData = await service.getUserDataWithDriversLicence(licenseId);
+            res.status(200).send({
+                status: true,
+                data: userData
+            });
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+     public async getUserDataWithPhoneNumber(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        try {
+            const { phoneNumber } = req.body;
+            validateBody(req.body, phoneNumberCheckSchema)
+
+            const service = await this.getService('youVerifyService');
+            const userData = await service.getUserDataWithPhoneNumber(phoneNumber);
+            res.status(200).send({
+                status: true,
+                data: userData
+            });
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+     public async getUserDataWithAccountNumber(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        try {
+            const { accountNumber } = req.body;
+            validateBody(req.body, accountNumberCheckSchema)
+
+            const service = await this.getService('youVerifyService');
+            const userData = await service.getUserDataWithAccountNumber(accountNumber);
             res.status(200).send({
                 status: true,
                 data: userData

@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["passportId"],
+  "properties": {
+    "passportId": {
+      "type": "string",
+      "description": "its a number that is assigned to a user for a means of verification",
+      "examples": [ "BAS3333445" ]
+    }
+  }
+}

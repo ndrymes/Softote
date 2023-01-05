@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["phoneNumber"],
+  "properties": {
+    "phoneNumber": {
+      "type": "string",
+      "pattern": "^\\d+$",
+      "errorMessage": {
+        "pattern": "PhoneNumber must contain only digits"
+      },
+      "description": "its a number that is assigned to a user for a means of verification",
+      "examples": [ 11113333445 ]
+    }
+  }
+}

@@ -1,6 +1,8 @@
 export class StandardError extends Error {
     public error_code: string;
 
+    body?: any
+
     public lastError?: Record<string, unknown> | null;
 
     public context?: Record<string, unknown> | null;
@@ -8,6 +10,7 @@ export class StandardError extends Error {
     constructor(
         errorCode: string,
         message: string,
+        body?:any,
         lastError?: Record<string, unknown> | null,
         context?: Record<string, unknown> | null
     ) {
@@ -20,5 +23,6 @@ export class StandardError extends Error {
         this.error_code = errorCode;
         this.lastError = lastError;
         this.context = context;
+        this.body = body
     }
 }

@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["licenseId"],
+  "properties": {
+    "licenseId": {
+      "type": "string",
+      "pattern": "^\\d+$",
+      "errorMessage": {
+        "pattern": "Drivers licence must contain only digits"
+      },
+      "description": "its a number that is assigned to a user for a means of verification",
+      "examples": [ 11113333445 ]
+    }
+  }
+}
