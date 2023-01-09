@@ -8,6 +8,7 @@ import passportCheckSchema from 'src/schemas/passportCheck.schema.json'
 import driversLicenseCheckSchema from 'src/schemas/driversLicenseCheck.schema.json'
 import phoneNumberCheckSchema from 'src/schemas/phoneNumberCheck.schema.json'
 import accountNumberCheckSchema from 'src/schemas/accountNumberCheck.schema.json'
+import companyCheckSchema from 'src/schemas/companyCheck.shema.json'
 
 import { identityServices } from 'src/services/identity';
 import { IdentityServices } from 'src/services/identity/youverify';
@@ -23,6 +24,9 @@ export class IdentityController {
         this.router.post('/identity/ng/drivers-license', handleTokenAuthorization(), this.getUserDataWithDriversLicence.bind(this));
         this.router.post('/identity/ng/phone', handleTokenAuthorization(), this.getUserDataWithPhoneNumber.bind(this));
         this.router.post('/identity/ng/bank-account-number', handleTokenAuthorization(), this.getUserDataWithAccountNumber.bind(this));
+        this.router.post('/identity/ng/company-check', handleTokenAuthorization(), this.getUserDataWithCAC.bind(this));
+
+        
     }
 
     getRouter(): Router {
@@ -116,6 +120,22 @@ export class IdentityController {
 
             const service = await this.getService('youVerifyService');
             const userData = await service.getUserDataWithAccountNumber(accountNumber);
+            res.status(200).send({
+                status: true,
+                data: userData
+            });
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+     public async getUserDataWithCAC(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+        try {
+            const { registrationNumber } = req.body;
+            validateBody(req.body, companyCheckSchema)
+
+            const service = await this.getService('youVerifyService');
+            const userData = await service.getUserDataWithCAC(registrationNumber);
             res.status(200).send({
                 status: true,
                 data: userData

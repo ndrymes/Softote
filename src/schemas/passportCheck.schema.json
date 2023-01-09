@@ -5,7 +5,7 @@
   "properties": {
     "passportId": {
       "type": "string",
-      "description": "its a number that is assigned to a user for a means of verification",
+      "description": "its a string that is assigned to a user for a means of verification",
       "examples": [ "BAS3333445" ]
     }
   }

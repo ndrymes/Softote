@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["registrationNumber"],
+  "properties": {
+    "registrationNumber": {
+      "type": "string",
+      "description": "its a string that is assigned to a company for a means of verification",
+      "examples": [ "BAS3333445" ]
+    }
+  }
+}
