@@ -3,17 +3,9 @@
 import { StandardError } from 'src/libs/standard-error';
 import { ErrorCodes } from 'src/domain/errors';
 
-export interface IdentityServices {
-    getUserDataWithBvn: ( bvn: string ) => any;
-    getUserDataWithNIN: ( nin: string ) => any;
-    getUserDataWithPassportId :( passportId: string ) => any;
-    getUserDataWithDriversLicence :( licenseId: string ) => any;
-    getUserDataWithPhoneNumber: ( nin: number ) => any;
-    getUserDataWithAccountNumber: ( nin: number ) => any;
-    getUserDataWithCAC:( registrationNumber: string )=> any
-}
+import { IidentityServices } from 'src/services/identity/interfaces';
 
-export class YouVerifyService implements IdentityServices{
+export class YouVerifyService implements IidentityServices{
 
   async getUserDataWithBvn( bvn: string ){
 
@@ -469,6 +461,100 @@ export class YouVerifyService implements IdentityServices{
           id:         '61d880f2e8e15aaf24558f9b'
         }
         ,
+      };
+
+    } catch( error ){
+
+      throw new StandardError( ErrorCodes.INTERNAL_SERVER_ERROR, 'Internal Server Error' );
+
+    }
+
+  }
+
+  async createCandidateByIdentity( type:string, idNumber: string ){
+
+    // get connection
+    // call youverify api
+
+    try{
+
+      return {
+        firstName:       'Peter',
+        middleName:      'Phillip',
+        lastName:        'Uche',
+        dateOfBirth:     '1950-02-04',
+        photo:           'data:image/jpg;base64,/9j/4AAQSkZJRgABAgAAAQAB',
+        mobile:          '08000000000',
+        idNumber:        '00000000000',
+        type:            'bvn',
+        medium:          'identity',
+        createdAt:       '2021-11-05T07:56:48.953Z',
+        lastModifiedAt:  '2021-11-05T07:56:48.953Z',
+        _createdAt:      '2021-11-05T08:56:4848+01:00',
+        _lastModifiedAt: '2021-11-05T08:56:4848+01:00',
+        id:              '6184e3c081ee238921cb9e86'
+      };
+
+    } catch( error ){
+
+      throw new StandardError( ErrorCodes.INTERNAL_SERVER_ERROR, 'Internal Server Error' );
+
+    }
+
+  }
+
+  async verifyCandidatesAddress(  candidateId :string, description: string, address:any  ){
+
+    // get connection
+    // call youverify api
+
+    try{
+
+      return  {
+        referenceId: '61883f9ebc2c9',
+        candidate:   {
+          candidateId: '6184e3c081ee238921cb9e86',
+          firstName:   'FAMOUS',
+          middleName:  'PRIOR',
+          lastName:    'EHICHIOYA',
+          photo:       'https://youverify-api-bucket.nyc3.digitaloceanspaces.com/reports/live_photos/2021-11-07/photo_61882c1d059b6506.jpg',
+          mobile:      '08036xxxxxx'
+        },
+        agent:   {},
+        address: {
+          latlong: {
+            lat: '6.500871399999999',
+            lon: '3.3765867'
+          },
+          flatNumber:     '1st floor',
+          buildingName:   'Sum house',
+          buildingNumber: '350',
+          subStreet:      'Hughes avenue',
+          street:         'Borno way',
+          landmark:       'Police Station',
+          state:          'Lagos',
+          city:           'Yaba',
+          country:        'Nigeria',
+          lga:            'Lagos Mainland'
+        },
+        status:         'pending',
+        taskStatus:     'PENDING',
+        subjectConsent: 'true',
+
+        notes:           [ 'notes' ],
+        isFlagged:       false,
+        images:          [ 'https://youverify-api-bucket.nyc3.digitaloceanspaces.com/reports/live_photos/2021-11-07/photo_61882c1d059b6506.jpg' ],
+        description:     'Verify the candidate',
+        reportId:        'reports_37fe307d-8112-4394-a4f1-303fe10f815a',
+        businessType:    'admin',
+        businessId:      '615c2deb203b96532838418b',
+        userId:          '615c2deb203b96532838418c',
+        type:            'individual',
+        createdAt:       '2021-11-07T19:44:41.771Z',
+        lastModifiedAt:  '2021-11-07T19:44:41.771Z',
+        _createdAt:      '2021-11-07T20:44:4141+01:00',
+        _lastModifiedAt: '2021-11-07T20:44:4141+01:00',
+        id:              '61882ca9a7422a684a3d0cdf'
       };
 
     } catch( error ){

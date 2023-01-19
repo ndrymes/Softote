@@ -1,5 +1,7 @@
 import { YouVerifyService } from './youverify';
+import { AppruveService } from './appruve';
 
 export const identityServices = {
-  youVerifyService: YouVerifyService
+  youVerifyService: YouVerifyService,
+  appruveService:   AppruveService
 };

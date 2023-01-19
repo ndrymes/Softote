@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type", "idNumber"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "These is a means of creating a candidate",
+      "examples": [ "bvn", "nin" ]
+    },
+     "idNumber": {
+      "type": "string",
+      "description": "its a unique string that can be used to fetch the user details",
+      "examples": [ "BAS3333445" ]
+    }
+  }
+}

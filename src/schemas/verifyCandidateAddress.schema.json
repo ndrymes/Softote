@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["candidateId", "description", "address"],
+  "properties": {
+    "candidateId": {
+      "type": "string",
+      "description": "These is a means of creating a candidate",
+      "examples": [ "bvn", "nin" ]
+    },
+     "description": {
+      "type": "string",
+      "description": "its a unique string that can be used to fetch the user details",
+      "examples": [ "BAS3333445" ]
+    },
+    "address": {
+      "type": "object",
+      "description": "its a unique string that can be used to fetch the user details",
+      "examples": [ {
+        "flatNumber": "flatNumber",
+        "buildingName": "buildingName",
+        "buildingNumber": "123",
+        "landmark": "landmark",
+        "street": "street",
+        "subStreet": "subStreet",
+        "state": "state",
+        "city": "city",
+        "lga": "lga"
+      } ]
+    }
+  }
+}

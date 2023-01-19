@@ -17,9 +17,9 @@ export const validateBody = ( body: any, schema: any, dependentSchemas: any[] = 
 
   if( !validate( body ) ){
 
-    const errors = validate.errors.map( entry=>`${ entry.message }` );
+    const errors = validate.errors.map( error=>`${ error.message }` );
 
-    throw new StandardError( ErrorCodes.BAD_REQUEST, 'Bad request', errors );
+    throw new StandardError( ErrorCodes.BAD_REQUEST, errors[0] );
 
   }
 
